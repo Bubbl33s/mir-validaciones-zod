@@ -10,11 +10,11 @@ type Product = {
 };
 
 export class ProductService {
-  async getAllProducts() {
+  static async getAllProducts() {
     return prisma.product.findMany();
   }
 
-  async getProductById(id: string) {
+  static async getProductById(id: string) {
     return prisma.product.findUnique({
       where: {
         id,
@@ -22,13 +22,13 @@ export class ProductService {
     });
   }
 
-  async createProduct(data: Product) {
+  static async createProduct(data: Product) {
     return prisma.product.create({
       data,
     });
   }
 
-  async updateProduct(id: string, data: Product) {
+  static async updateProduct(id: string, data: Product) {
     const product = await prisma.product.findUnique({
       where: {
         id,
@@ -47,7 +47,7 @@ export class ProductService {
     });
   }
 
-  async deleteProduct(id: string) {
+  static async deleteProduct(id: string) {
     const product = await prisma.product.findUnique({
       where: {
         id,
