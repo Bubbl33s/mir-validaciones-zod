@@ -2,12 +2,13 @@ import { Request, Response, NextFunction } from "express";
 import { ProductService } from "../services/product.service";
 
 export class ProductController {
-  static async getAllProducts(req: Request, res: Response, next: NextFunction) {
+  static async getAllProducts(_: Request, res: Response, next: NextFunction) {
     try {
       const products = await ProductService.getAllProducts();
 
       if (!products) {
-        return res.status(404).json({ message: "No products found" });
+        res.status(404).json({ message: "No products found" });
+        return;
       }
 
       res.json(products);
@@ -22,7 +23,8 @@ export class ProductController {
       const product = await ProductService.getProductById(id);
 
       if (!product) {
-        return res.status(404).json({ message: "Product not found" });
+        res.status(404).json({ message: "Product not found" });
+        return;
       }
 
       res.json(product);
